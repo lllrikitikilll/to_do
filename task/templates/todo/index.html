@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}To Do{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="main__item">
+        <h2>Заданий на сегодня: {{ today.count }}</h2>
+        {% for task in today %}
+        <ul>
+            <li>{{ task.title }} : {{ task.date }} : {{ task.get_done_display }}</li>
+        </ul>
+            {% endfor %}
+    </div>
+    <div class="main__item">
+        <h2>Заданий на завтра: {{ tomorrow.count }}</h2>
+        {% for task in tomorrow %}
+        <ul>
+            <li>{{ task.title }} : {{ task.date }} : {{ task.get_done_display }}</li>
+        </ul>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

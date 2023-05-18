@@ -1,0 +1,29 @@
+.main
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+header {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.header-left {
+  float: left;
+}
+
+.header-left a {
+  margin-right: 10px;
+  color: #000000; /* Измените на нужный цвет */
+  text-decoration: none;
+  font-size: 20px; /* Измените на нужный размер */
+}
+
+.main__item
+{
+  background: orange;
+  padding: 10px;
+  margin-right: 5px;
+}
