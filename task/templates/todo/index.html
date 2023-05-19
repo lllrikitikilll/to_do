@@ -4,21 +4,19 @@
 
 {% block content %}
 <div class="main">
+  {% for day in days %}
     <div class="main__item">
-        <h2>Заданий на сегодня: {{ today.count }}</h2>
-        {% for task in today %}
+        <h2>Задания на {{ day }}</h2>
+        <hr>
+        {% for task in tasks %}
         <ul>
-            <li>{{ task.title }} : {{ task.date }} : {{ task.get_done_display }}</li>
+          {% if task.date == day %}
+            <li>{{ task.title }} : {{ task.get_done_display }}</li>
+          {% endif %}
         </ul>
-            {% endfor %}
+        {% endfor %} 
+    <a href='{% url "task:add" day %}'>Добавить</a>
     </div>
-    <div class="main__item">
-        <h2>Заданий на завтра: {{ tomorrow.count }}</h2>
-        {% for task in tomorrow %}
-        <ul>
-            <li>{{ task.title }} : {{ task.date }} : {{ task.get_done_display }}</li>
-        </ul>
-            {% endfor %}
-    </div>
+  {% endfor %}
 </div>
 {% endblock %}

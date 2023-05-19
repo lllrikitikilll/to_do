@@ -6,14 +6,12 @@ from .models import Ts
 from .forms import TsForm
 # Create your views here.
 def index(request):
-    today = Ts.objects.filter(date=datetime.datetime.now())
-    tomorrow = Ts.objects.filter(date=datetime.datetime.now() + datetime.timedelta(days=1))
+    days = [(datetime.datetime.now() + datetime.timedelta(days=i)).date() for i in range(7)] 
+    tasks = Ts.objects.filter(date__gte=datetime.datetime.now())
+    return render(request, 'todo/index.html', {'days': days, 'tasks': tasks})
 
-    return render(request, 'todo/index.html', {'today': today,
-                                               "tomorrow": tomorrow})
-
-def add_task(request: HttpRequest):
-    form = TsForm()
+def add_task(request: HttpRequest, date_str):
+    form = TsForm({'date': date_str})
     if request.method == 'POST':
         task = TsForm(request.POST)
         if task.is_valid():
