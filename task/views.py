@@ -2,21 +2,61 @@ import datetime
 
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
 from .models import Ts
 from .forms import TsForm
-# Create your views here.
-def index(request):
-    days = [(datetime.datetime.now() + datetime.timedelta(days=i)).date() for i in range(7)] 
-    tasks = Ts.objects.filter(date__gte=datetime.datetime.now())
-    return render(request, 'todo/index.html', {'days': days, 'tasks': tasks})
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
 
-def add_task(request: HttpRequest, date_str):
-    form = TsForm({'date': date_str})
-    if request.method == 'POST':
-        task = TsForm(request.POST)
-        if task.is_valid():
-            task.save()
-            return redirect('task:index')
-        else:
-            form = task
-    return render(request, 'todo/add.html', {'form': form})
+
+# TsList ->
+# def index(request):
+#     days = [(datetime.datetime.now() + datetime.timedelta(days=i)).date() for i in range(7)]
+#     tasks = Ts.objects.filter(date__gte=datetime.datetime.now())
+#     return render(request, 'task/index.html', {'days': days, 'tasks': tasks})
+
+# AddTask
+# def add_task(request: HttpRequest, date_str):
+#     form = TsForm({'date': date_str})
+#     if request.method == 'POST':
+#         task = TsForm(request.POST)
+#         if task.is_valid():
+#             task.save()
+#             return redirect('task:index')
+#         else:
+#             form = task
+#     return render(request, 'task/add.html', {'form': form})
+
+class TsList(ListView):
+    template_name = 'task/index.html'
+    context_object_name = "tasks"
+    queryset = Ts.objects.filter(date__gte=datetime.datetime.now())
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['days'] = [(datetime.datetime.now() + datetime.timedelta(days=i)).date() for i in range(7)]
+        return context
+
+
+class TaskDetail(DetailView):
+    model = Ts
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class AddTask(FormView):
+    template_name = 'task/add.html'
+    form_class = TsForm
+    success_url = reverse_lazy('task:index')
+
+    def get_initial(self):
+        initial = {'done': Ts.Done.NOT, 'date': self.kwargs['date_str']}
+        return initial
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

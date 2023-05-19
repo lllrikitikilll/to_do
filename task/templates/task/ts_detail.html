@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+<div class="task-detail-container">
+  <div class="task-detail-content">
+    <h1>{{ ts.title }}</h1>
+    <h2>{{ ts.date }}</h2>
+    <h2>{{ ts.description|linebreaks }}</h2>
+    <p>Статус: {{ ts.get_done_display }}</p>
+  </div>
+</div>
+{% endblock %}

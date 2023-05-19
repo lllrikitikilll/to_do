@@ -1,0 +1,117 @@
+/* style.css */
+
+/* Общие стили */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1c1c1c;
+}
+.top a {
+    text-decoration: none;
+    font-size: 30px;
+  color: #d60270; /* Розовый цвет ссылок */
+  transition: color 0.3s ease; /* Эффект смены цвета при наведении */
+}
+.top a:hover {
+  color: #ffa000; /* Новый цвет при наведении на ссылку */
+  }
+a {
+  text-decoration: none;
+  color: #d60270; /* Розовый цвет ссылок */
+  transition: color 0.3s ease; /* Эффект смены цвета при наведении */
+}
+
+a:hover {
+  color: #ffa000; /* Новый цвет при наведении на ссылку */
+}
+
+/* Стили для index.html */
+.main {
+  margin: 20px;
+  background-color: #1c1c1c; /* Черный фон для div.main */
+  padding: 10px;
+  color: #fff; /* Белый цвет текста внутри div.main */
+  display: flex; /* Использовать flexbox для контейнера div.main */
+  justify-content: space-between; /* Равномерное распределение элементов по ширине */
+}
+
+.main__item {
+  width: calc(33.33% - 10px); /* Ширина каждого элемента div.main__item (33.33% с вычетом отступа) */
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+.day {
+  color: #fff; /* Измените на нужный цвет */
+  text-decoration: none;
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+.description {
+  color: #808080; /* Измените на нужный цвет */
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* Стили для add.html и task_detail.html */
+.task-detail-container,
+.add-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.task-detail-content,
+.add-content {
+  text-align: center;
+}
+
+/* Стили для add.html */
+form {
+  margin: 20px;
+}
+
+input[type="submit"] {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Стили для task_detail.html */
+h1 {
+  font-size: 24px;
+  color: #fff;
+}
+
+h2 {
+  font-size: 18px;
+  color: #fff;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+/* Общие стили для базового шаблона */
+header {
+  background-color: #1c1c1c;
+  padding: 10px 20px;
+}
+
+header a {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Дополнительные стили можно добавить сюда */
+ul {
+     list-style-type: none;
+     padding-left: 0;
+}

@@ -4,12 +4,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta
+      name="GENERATOR"
+      content="Microsoft FrontPage 4.0"
+    />
+    <meta
+      name="ProgId"
+      content="FrontPage.Editor.Document"
+    />
+    <meta http-equiv="refresh" content="40">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style_gpt.css' %}">
 </head>
 <body>
 <header>
-    <div>
+    <div class="top">
     <a href="{% url 'task:index' %}">Задачи</a>
     </div>
 </header>

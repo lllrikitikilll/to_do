@@ -1,29 +1,55 @@
-.main
-{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
 header {
-  background-color: #f1f1f1;
+  background-color: #1c1c1c;
   padding: 20px;
 }
 
 .header-left {
   float: left;
 }
+ul {
+     list-style-type: none
+}
+.description {
+    color: #808080 /* Измените на нужный цвет */;
+    text-decoration: none;
+    font-size: 12px
+}
 
+.day {
+    color: #fff /* Измените на нужный цвет */;
+    text-decoration: none;
+    font-size: 25px
+}
+
+
+a {
+    color: #d60270 /* Измените на нужный цвет */;
+    text-decoration: none;
+    font-size: 25px
+
+    -webkit-transition: all 1s ease;
+          transition: all 1s ease; /* Время изменения цвета */
+}
+a:hover {
+  color: #ffa000; /* Меняем цвет ссылки */
+}
+
+}
 .header-left a {
   margin-right: 10px;
-  color: #000000; /* Измените на нужный цвет */
+  color: #d60270; /* Измените на нужный цвет */
   text-decoration: none;
   font-size: 20px; /* Измените на нужный размер */
 }
 
-.main__item
-{
-  background: orange;
+.main {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  display: flex;
+}
+
+.main__item {
+  background: #1c1c1c;
   padding: 10px;
   margin-right: 5px;
 }
