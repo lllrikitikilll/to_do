@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from .models import Ts
 from .forms import TsForm
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 
@@ -60,3 +60,15 @@ class AddTask(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+class TaskChange(UpdateView):
+    model = Ts
+    form_class = TsForm
+    template_name = 'task/ts_form.html'
+    success_url = reverse_lazy('task:index')
+
+
+class TaskDelete(DeleteView):
+    model =Ts
+    success_url = reverse_lazy('task:index')
+    template_name = 'task/task_delete.html'

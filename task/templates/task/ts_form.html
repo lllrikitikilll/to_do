@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Добавить{% endblock %}
+{% block title %}Изменить{% endblock %}
 
 {% block content %}
 <div class="add-container">
@@ -8,9 +8,8 @@
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit">
+      <input type="submit" value='Сохранить'>
     </form>
   </div>
 </div>
 {% endblock %}
-

@@ -7,16 +7,19 @@
   {% for day in days %}
     <div class="main__item">
         <h2 class="day">{{ day }}</h2>
+        <h2>{{ day|date:'l' }}</h2>
         <hr>
         {% for task in tasks %}
         <ul>
           {% if task.date == day %}
-            <a href="{% url 'task:detail' task.pk %}">
                 <li>
-                    {% if task.done == 'n' %}[  ]  {% else %}[✕]  {% endif %}{{ task.title }}
+                    <a href="{% url 'task:detail' task.pk %}">
+                      {% if task.done == 'n' %}[  ]  {% else %}[✕]  {% endif %}{{ task.title }}
+                    </a>
                 </li>
-            </a>
             <p class="description">{{ task.description|truncatechars:25 }}</p>
+            <a href='{% url "task:change" task.pk %}'>Изменить </a><a href='{% url "task:delete" task.pk %}'>Удалить</a>
+            <hr>
           {% endif %}
         </ul>
         {% endfor %}
@@ -26,3 +29,4 @@
   {% endfor %}
 </div>
 {% endblock %}
+
