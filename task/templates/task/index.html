@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}To Do{% endblock %}
 
 {% block content %}
@@ -18,13 +18,14 @@
                     </a>
                 </li>
             <p class="description">{{ task.description|default:'...'|truncatechars:25 }}</p>
-            <a href='{% url "task:change" task.pk %}'>Изменить </a><a href='{% url "task:delete" task.pk %}'>Удалить</a>
+            <a class='a_change' href='{% url "task:change" task.pk %}'><img src='{% static "/icon/change.svg" %}' widht='40' height='40'></a>
+            <a class='a_delete' href='{% url "task:delete" task.pk %}'><img src='{% static "/icon/delete.svg" %}' widht='40' height='40'></a>
             <hr>
           {% endif %}
         </ul>
         {% endfor %}
         <br>
-    <a href='{% url "task:add" day %}'>Добавить</a>
+    <a class='a_add' href='{% url "task:add" day %}'><img src='{% static "/icon/add.svg" %}' widht='40' height='40'></a>
     </div>
   {% endfor %}
 </div>

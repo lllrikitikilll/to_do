@@ -3,9 +3,16 @@
 {% block title %}Удалить задачу{% endblock %}
 
 {% block content %}
-<p>{{ ts.title }}</p>
-<form method='post'>
-  {% csrf_token %}
-  <input type='submit' value='Удалить'>
-</form>
+<div class="task-detail-container">
+  <div class="task-detail-content">
+    <p>{{ ts.title }}</p>
+    <p>{{ ts.date }}</p>
+    <p>{{ ts.description }}</p>
+    <p>Статус: {{ ts.get_done_display }}</p>
+    <form method='post'>
+      {% csrf_token %}
+      <input type='submit' value='Удалить'>
+    </form>
+  </div>
+</div>
 {% endblock %}
