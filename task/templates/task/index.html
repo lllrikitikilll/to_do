@@ -6,8 +6,8 @@
 <div class="main">
   {% for day in days %}
     <div class="main__item">
-        <h2 class="day">{{ day }}</h2>
-        <h2>{{ day|date:'l' }}</h2>
+        <h2 class="day">{{ day|date:'l' }}</h2>
+        <h2>{{ day|date:'' }}</h2>
         <hr>
         {% for task in tasks %}
         <ul>
@@ -17,7 +17,7 @@
                       {% if task.done == 'n' %}[  ]  {% else %}[✕]  {% endif %}{{ task.title }}
                     </a>
                 </li>
-            <p class="description">{{ task.description|truncatechars:25 }}</p>
+            <p class="description">{{ task.description|default:'...'|truncatechars:25 }}</p>
             <a href='{% url "task:change" task.pk %}'>Изменить </a><a href='{% url "task:delete" task.pk %}'>Удалить</a>
             <hr>
           {% endif %}
