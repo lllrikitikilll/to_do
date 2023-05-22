@@ -1,4 +1,5 @@
 import datetime
+from typing import Any, Dict
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -31,7 +32,7 @@ from django.views.generic.list import ListView
 class TsList(ListView):
     template_name = 'task/index.html'
     context_object_name = "tasks"
-    queryset = Ts.objects.filter(date__gte=datetime.datetime.now())
+    queryset = Ts.objects.filter(date__gte=datetime.datetime.now()).order_by('pk')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -59,7 +60,12 @@ class AddTask(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-
+    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['date'] = self.kwargs['date_str']
+        return context
+    
 class TaskChange(UpdateView):
     model = Ts
     form_class = TsForm
@@ -71,3 +77,15 @@ class TaskDelete(DeleteView):
     model =Ts
     success_url = reverse_lazy('task:index')
     template_name = 'task/task_delete.html'
+
+
+def done_change(request, pk_task):
+    cur_task = Ts.objects.get(pk=pk_task)
+    
+    if cur_task.done == Ts.Done.DONE:
+        cur_task.done = Ts.Done.NOT
+    else:
+        cur_task.done = Ts.Done.DONE
+
+    cur_task.save()
+    return redirect('task:index')

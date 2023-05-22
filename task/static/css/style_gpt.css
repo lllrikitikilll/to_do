@@ -122,3 +122,15 @@ ul {
   display: block;
   text-align: center;
 }
+
+.a_delete {
+  padding-left: 20px;
+}
+
+.a_change {
+  padding-left: 20px;
+}
+
+.a_done {
+  padding-left: 20px;
+}

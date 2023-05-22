@@ -14,19 +14,25 @@
           {% if task.date == day %}
                 <li>
                     <a href="{% url 'task:detail' task.pk %}">
-                      {% if task.done == 'n' %}[  ]  {% else %}[✕]  {% endif %}{{ task.title }}
+                      {% if task.done == 'd' %}<s>{{ task.title }}</s>{% else %}{{ task.title }}{% endif %}
                     </a>
                 </li>
             <p class="description">{{ task.description|default:'...'|truncatechars:25 }}</p>
-            <a class='a_change' href='{% url "task:change" task.pk %}'><img src='{% static "/icon/change.svg" %}' widht='40' height='40'></a>
-            <a class='a_delete' href='{% url "task:delete" task.pk %}'><img src='{% static "/icon/delete.svg" %}' widht='40' height='40'></a>
+            {% comment %} <a class='a_change' href='{% url "task:change" task.pk %}'><img src='{% static "/icon/change.svg" %}' widht='40' height='40'></a> {% endcomment %}
+            {% comment %} <a class='a_delete' href='{% url "task:delete" task.pk %}'><img src='{% static "/icon/delete.svg" %}' widht='40' height='40'></a> {% endcomment %}
+            <a class='a_change' href='{% url "task:change" task.pk %}'>Изм. </a>
+            <a class='a_delete' href='{% url "task:delete" task.pk %}'>Уд. </a>
+            <a class='a_done' href='{% url "task:done" task.pk %}'>
+              {% if task.done == 'n' %}Готово{% else %}отменить{% endif %}
+            </a>
             <hr>
           {% endif %}
         </ul>
         {% endfor %}
         <br>
-    <a class='a_add' href='{% url "task:add" day %}'><img src='{% static "/icon/add.svg" %}' widht='40' height='40'></a>
-    </div>
+    {% comment %} <a class='a_add' href='{% url "task:add" day %}'><img src='{% static "/icon/add.svg" %}' widht='40' height='40'></a> {% endcomment %}
+    <a class='a_add' href='{% url "task:add" day %}'>Добавить</a>
+  </div>
   {% endfor %}
 </div>
 {% endblock %}
