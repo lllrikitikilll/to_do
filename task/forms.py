@@ -6,7 +6,8 @@ from django.forms.widgets import SelectDateWidget, TextInput
 class TsForm(ModelForm):
     class Meta:
         model = Ts
-        fields = ['title', 'description', 'done']
+        fields = ['title', 'description', 'date', 'done']
     
-        #widgets = {
-         #       'date': SelectDateWidget(empty_label=('Выберите год', "Выберите месяц", "Выберите день"))}
+        widgets = {
+                'date': SelectDateWidget(empty_label=('Выберите год', "Выберите месяц", "Выберите день"))
+        }
